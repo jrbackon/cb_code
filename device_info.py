@@ -1,8 +1,9 @@
 # import CB modules
-from tkinter.font import names
 from cbc_sdk import CBCloudAPI
 from cbc_sdk.platform import Device
-cb = CBCloudAPI(profile='uninstall')
+
+# info on API authentication https://carbon-black-cloud-python-sdk.readthedocs.io/en/latest/authentication/
+cb = CBCloudAPI(profile='device')
 
 # open file with asset tags and convert to a list
 def assets(assets):
@@ -51,7 +52,7 @@ def usernames(names):
         if device.email[7:] in usernames:
             count += 1
 # for each match print out the username, device id, and asset tag
-            matching_usernames.append([device.email, device.id, device.name])
+            matching_usernames.append([device.email, device.id, device.name, device.policy_name])
 
     print("There are " + str(count) + " senior usernames in the console.")
 
@@ -61,5 +62,5 @@ def usernames(names):
             i.write(str(item))
             i.write("\n")
 
-assets('/Users/jbackon/Repos/cb_code/Data/2022_senior_assets.txt')
-usernames('/Users/jbackon/Repos/cb_code/Data/2022_seniors.txt')
+# assets('/Users/jbackon/Repos/cb_code/Data/2022_senior_assets.txt')
+usernames('/Users/jbackon/Repos/cb_code/Data/2022_senior_usernames.txt')
