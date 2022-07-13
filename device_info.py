@@ -15,7 +15,6 @@ def assets(assets):
     count = 0
 # run a query to pull all CB devices from the console.
     query = cb.select(Device)
-
 # for each device loop through the list of asset tags to determine if that asset tag is in device.name.
 # It must be done this way becasue sometimes device.name looks like BABSON/Lxx-xxxx and sometimes it just looks like Lxx-xxxx.
     matching_assets = []
@@ -24,14 +23,16 @@ def assets(assets):
             if value in device.name:
                 count += 1
 # For each asset tag -> device match print out the username, device id, and asset tag
-                matching_assets.append([device.email, device.id, device.name])
+                matching_assets.append([device.email, device.name, device.id, device.policy_name, device.last_contact_time])
 # Report out the total number of matches for easy comparison
-    print("There are " + str(count) + " senior assets in the console.")
+    print("There are " + str(count) + " assets in the console.")
 
 # output list of matching assets to a new file
     with open("/Users/jbackon/Repos/cb_code/asset_output.txt", "w") as g:
+        g.write("Username, Asset #, CB Device ID, CB Policy, Last Check-in Time")
+        g.write("\n")
         for item in matching_assets:
-            g.write(str(item))
+            g.write(str(item[0]) + ', ' + str(item[1]) + ', ' + str(item[2]) + ', ' + str(item[3]) + ', ' + str(item[4]))
             g.write("\n")
 
 # open file with usernames and convert to a list
@@ -52,15 +53,41 @@ def usernames(names):
         if device.email[7:] in usernames:
             count += 1
 # for each match print out the username, device id, and asset tag
-            matching_usernames.append([device.email, device.id, device.name, device.policy_name])
+            matching_usernames.append([device.email, device.name, device.id, device.policy_name, device.last_contact_time])
 
-    print("There are " + str(count) + " senior usernames in the console.")
+    print("There are " + str(count) + " usernames in the console.")
 
     # output list of device IDs to a new file
     with open("/Users/jbackon/Repos/cb_code/username_output.txt", "w") as i:
+        i.write("Username, Asset #, CB Device ID, CB Policy, Last Check-in Time")
+        i.write("\n")
         for item in matching_usernames:
-            i.write(str(item))
+            i.write(str(item[0]) + ', ' + str(item[1]) + ', ' + str(item[2]) + ', ' + str(item[3]) + ', ' + str(item[4]))
             i.write("\n")
 
-# assets('/Users/jbackon/Repos/cb_code/Data/2022_senior_assets.txt')
-usernames('/Users/jbackon/Repos/cb_code/Data/2022_senior_usernames.txt')
+selection = ''
+while selection != '3':
+    selection = input('Would you like to query Carbon Black based on username or asset tag?\n 1. Username\n 2. Asset Tag\n 3. Quit\n > ')
+    if selection == '1':
+        flag = 0
+        while flag == 0:
+            location = input("What is the path of the text file with the list of usernames or type 'b' to go back : ")
+            if location == 'b':
+                break
+            elif location[-4:] != '.txt':
+                print('Please ensure you are using a .txt file to run the query.')
+            else:
+                flag = 1
+                usernames(location)
+
+    elif selection == '2':
+        flag = 0
+        while flag == 0:
+            location = input("What is the path of the text file with the list of asset tags or type 'b' to go back: ")
+            if location == 'b':
+                break
+            elif location[-4:] != '.txt':
+                print('Please ensure you are using a .txt file to run the query.')
+            else:
+                flag = 1
+                assets(location)
