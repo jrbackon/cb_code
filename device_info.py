@@ -28,7 +28,7 @@ def assets(assets):
     print("There are " + str(count) + " assets in the console.")
 
 # output list of matching assets to a new file
-    with open("/Users/jbackon/Repos/cb_code/asset_output.txt", "w") as g:
+    with open("./asset_output.txt", "w") as g:
         g.write("Username, Asset #, CB Device ID, CB Policy, Last Check-in Time")
         g.write("\n")
         for item in matching_assets:
@@ -58,7 +58,7 @@ def usernames(names):
     print("There are " + str(count) + " usernames in the console.")
 
     # output list of device IDs to a new file
-    with open("/Users/jbackon/Repos/cb_code/username_output.txt", "w") as i:
+    with open("./username_output.txt", "w") as i:
         i.write("Username, Asset #, CB Device ID, CB Policy, Last Check-in Time")
         i.write("\n")
         for item in matching_usernames:
