@@ -11,9 +11,6 @@ def convert_to_list(text):
             information[i] = information[i].strip("\n")
     return information
 
-# converting the input text file to a list
-to_uninstall = convert_to_list('')
-
 # a function to uninstall sensors based on a list of device ids
 def uninstall_sensor(devices):
     count = 0
@@ -35,5 +32,13 @@ def delete_sensor(devices):
     return True
 
 # the main function calls to uninstall and delete sensors from a list of device ids.
-uninstall_sensor(to_uninstall)
-delete_sensor(to_uninstall)
+flag = 0
+while flag == 0:
+    to_delete = input('What is the path of the file containing device IDs to be deleted: ')
+    if to_delete[-4:] != '.txt':
+        print('Please ensure you are using a .txt file to input device IDs.\n')
+    else:
+        flag = 1
+get_ridof = convert_to_list(to_delete)
+uninstall_sensor(get_ridof)
+delete_sensor(get_ridof)
