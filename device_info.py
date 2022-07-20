@@ -23,16 +23,16 @@ def assets(assets):
             if value in device.name:
                 count += 1
 # For each asset tag -> device match print out the username, device id, and asset tag
-                matching_assets.append([device.email, device.name, device.id, device.policy_name, device.last_contact_time])
+                matching_assets.append([device.email, device.name, device.id, device.last_contact_time])
 # Report out the total number of matches for easy comparison
     print("There are " + str(count) + " assets in the console.")
 
 # output list of matching assets to a new file
     with open("./asset_output.txt", "w") as g:
-        g.write("Username, Asset #, CB Device ID, CB Policy, Last Check-in Time")
+        g.write("Username, Asset #, CB Device ID, Last Check-in Time")
         g.write("\n")
         for item in matching_assets:
-            g.write(str(item[0]) + ', ' + str(item[1]) + ', ' + str(item[2]) + ', ' + str(item[3]) + ', ' + str(item[4]))
+            g.write(str(item[0]) + ', ' + str(item[1]) + ', ' + str(item[2]) + ', ' + str(item[3]))
             g.write("\n")
 
 # open file with usernames and convert to a list
@@ -53,16 +53,16 @@ def usernames(names):
         if device.email[7:] in usernames:
             count += 1
 # for each match print out the username, device id, and asset tag
-            matching_usernames.append([device.email, device.name, device.id, device.policy_name, device.last_contact_time])
+            matching_usernames.append([device.email, device.name, device.id, device.last_contact_time])
 
     print("There are " + str(count) + " usernames in the console.")
 
     # output list of device IDs to a new file
     with open("./username_output.txt", "w") as i:
-        i.write("Username, Asset #, CB Device ID, CB Policy, Last Check-in Time")
+        i.write("Username, Asset #, CB Device ID, Last Check-in Time")
         i.write("\n")
         for item in matching_usernames:
-            i.write(str(item[0]) + ', ' + str(item[1]) + ', ' + str(item[2]) + ', ' + str(item[3]) + ', ' + str(item[4]))
+            i.write(str(item[0]) + ', ' + str(item[1]) + ', ' + str(item[2]) + ', ' + str(item[3]))
             i.write("\n")
 
 selection = ''
