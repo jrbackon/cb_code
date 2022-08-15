@@ -20,3 +20,6 @@ This script inputs a list of CB device IDs and:
 2. Deregisters the device from the console.
 
 This script is useful for bulk removing devices from the console in the absence of any meaningful way to group sensors. Either of the two scripts listed above can be used to get lists of device IDs from more relevant information like username or asset tag.
+
+## remove_inactive.py
+This script will remove all devices that haven't checked into the CB cloud console for 30 days or more. It will also generate a log file for auditing purposes. Given that any domain bound device on campus will have CB deployed via SCCM, this script can be run at regular intervals to automate sensor removal from assets that are no longer in use or have been redeployed.
