@@ -24,7 +24,7 @@ def inactive():
         for device in query: # loops through all devices in the CB database
             if device.policy_name == 'Standard': # ensures that only devices in the standard policy will be checked
                 check = time_diff(device.last_contact_time[:10]) # checks the last time the device checked into the CB console
-                if check >= 120: # if the check was more than 90 days ago
+                if check >= 30: # if the check was more than 90 days ago
                     inactive.append(device.id) # add the device ID to the inactive list
                     log_output = device.email + ", " + device.name + ", " + device.last_contact_time # create the username, asset tag, and last check in time string
                     f.write(log_output + '\n') # add the above string to the log file
