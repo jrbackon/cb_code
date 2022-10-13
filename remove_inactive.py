@@ -8,6 +8,11 @@ from datetime import date
 provider = cred.RegistryCredentialProvider()
 cb = CBCloudAPI(credential_provider = provider, profile='uninstall')
 
+# For Mac, comment lines 8-9 and uncomment line 12.
+# cb = CBCloudAPI(profile='uninstall')
+
+
+
 def time_diff(last_contact_time): # inputs a date of format Year-Month-Date e.g. 2022-07-13
     last_time = last_contact_time.split('-') # splits this string into a list around the '-'
     convert = date(int(last_time[0]), int(last_time[1]), int(last_time[2])) # converts the list into a datetime object
