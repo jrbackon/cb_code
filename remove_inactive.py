@@ -1,9 +1,12 @@
-from cbc_sdk.rest_api import CBCloudAPI
+from msilib.schema import Registry
+from cbc_sdk import CBCloudAPI
+import cbc_sdk.credential_providers.registry_credential_provider as cred
 from cbc_sdk.platform import Device
 from datetime import date
 
 # info on API authentication https://carbon-black-cloud-python-sdk.readthedocs.io/en/latest/authentication/
-cb = CBCloudAPI(profile='uninstall')
+provider = cred.RegistryCredentialProvider()
+cb = CBCloudAPI(credential_provider = provider, profile='uninstall')
 
 def time_diff(last_contact_time): # inputs a date of format Year-Month-Date e.g. 2022-07-13
     last_time = last_contact_time.split('-') # splits this string into a list around the '-'
