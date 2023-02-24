@@ -39,6 +39,7 @@ def inactive():
                     inactive.append(device.id) # add the device ID to the inactive list
                     log_output = device.email + ", " + device.name + ", " + device.last_contact_time # create the username, asset tag, and last check in time string
                     f.write(log_output + '\n') # add the above string to the log file
+                    print("Removed " + device.name + " from the CB console.")
     return inactive
 
 def main():
